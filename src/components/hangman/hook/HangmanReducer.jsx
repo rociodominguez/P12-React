@@ -1,4 +1,4 @@
-import { getRandomWord } from "./HangmanUtils";
+import { getRandomWord } from '../utils/HangmanUtils';
 
 export const initialState = {
   word: '',

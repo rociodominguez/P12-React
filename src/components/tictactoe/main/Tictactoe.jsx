@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import Board from './Board';
-import { calculateWinner } from './TictactoeUtils';
+import Board from '../utils/board/Board';
+import { calculateWinner } from '../utils/TictactoeUtils';
 import './Tictactoe.css';
 
 const TicTacToe = () => {
@@ -15,16 +15,22 @@ const TicTacToe = () => {
     newSquares[index] = xIsNext ? 'X' : 'O';
     setSquares(newSquares);
     setXIsNext(!xIsNext);
-  }
+  };
 
   const handleRestart = () => {
     setSquares(Array(9).fill(null));
     setXIsNext(true);
-  }
+  };
 
   const winner = calculateWinner(squares);
+  
+  const isBoardFull = squares.every(square => square !== null);
+  const isDraw = isBoardFull && !winner;
+
   const status = winner
     ? `El ganador es ${winner}`
+    : isDraw
+    ? '¡Empate!'
     : `Es el turno de ${xIsNext ? 'X' : 'O'}`;
 
   return (
@@ -37,6 +43,6 @@ const TicTacToe = () => {
       <button className="restart-button" onClick={handleRestart}>Reiniciar Partida</button>
     </div>
   );
-}
+};
 
 export default TicTacToe;

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { getRandomWord, hasPlayerWon, hasPlayerLost } from './HangmanUtils';
+import { getRandomWord, hasPlayerWon, hasPlayerLost } from '../utils/HangmanUtils';
 
 export const useHangman = () => {
   const [word, setWord] = useState(getRandomWord());
@@ -19,6 +19,12 @@ export const useHangman = () => {
     }
   };
 
+  const handleRestart = () => {
+    setWord(getRandomWord());
+    setGuessedLetters([]);
+    setWrongGuesses(0);
+  };
+
   return {
     word,
     guessedLetters,
@@ -26,5 +32,6 @@ export const useHangman = () => {
     isWinner,
     isLoser,
     handleLetterClick,
+    handleRestart,
   };
 };
